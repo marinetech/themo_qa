@@ -8,7 +8,7 @@ thresholds["flntu_tur_max"] = 1
 
 #-----------BAROMETER-------------#
 thresholds["barometer_ps_min"] = 1000
-thresholds["barometer_ps_max"] = 1012
+thresholds["barometer_ps_max"] = 1015
 
 #-----------MICROCAT-------------#
 thresholds["microcat_sali_min"] = 38.9
@@ -44,7 +44,11 @@ thresholds["metpak_dewpoint_max"] = 100
 thresholds["metpak_dewpoint_min"] = 0
 
 #-----------Wind-------------#
-thresholds["wind_speed_max"] = 3 # 30m/s ~= 100km/h
+thresholds["wind_speed_max"] = 30 # 30m/s ~= 100km/h
 thresholds["wind_speed_min"] = 0
 thresholds["wind_direction_max"] = 359
 thresholds["wind_direction_min"] = 0
+
+#-----------Wind-------------#
+thresholds["dcs_direction_max"] = 359
+thresholds["dcs_direction_min"] = 0

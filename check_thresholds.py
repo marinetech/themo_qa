@@ -125,34 +125,32 @@ def validate_windsonic_values():
 
 def validate_dcs_values():
     filter = {'sensor_name':'windsonic', '$or': [
-                {'Direction[DegM]': {'$lt': thresholds["wind_speed_min"]}},
-                {'Direction[DegM]': {'$gt': thresholds["wind_speed_max"]}},
-                {'East[cm/s]': {'$lt': thresholds["wind_speed_min"]}},
-                {'East[cm/s]': {'$gt': thresholds["wind_speed_max"]}},
-                {'Temperature[DegC]': {'$gt': thresholds["wind_direction_max"]}},
-                {'Temperature[DegC]': {'$lt': thresholds["wind_direction_min"]}},
-                {'Heading[DegM]': {'$gt': thresholds["wind_direction_max"]}},
-                {'Heading[DegM]': {'$gt': thresholds["wind_direction_max"]}},
-                {'North[cm/s]': {'$gt': thresholds["wind_direction_max"]}},
-                {'North[cm/s]': {'$gt': thresholds["wind_direction_max"]}},
-                {'Abs_Speed[cm/s]': {'$gt': thresholds["wind_direction_max"]}},
-                {'Abs_Speed[cm/s]': {'$gt': thresholds["wind_direction_max"]}},
-                {'Abs_Tilt[Deg]': {'$gt': thresholds["wind_direction_max"]}},
-                {'Abs_Tilt[Deg]': {'$gt': thresholds["wind_direction_max"]}},
-                {'DCS_MEASUREMENT': {'$gt': thresholds["wind_direction_max"]}},
-                {'DCS_MEASUREMENT': {'$gt': thresholds["wind_direction_max"]}},
-                {'Strength[dB]': {'$gt': thresholds["wind_direction_max"]}},
-                {'Strength[dB]': {'$gt': thresholds["wind_direction_max"]}},
-                {'Max_Tilt[Deg]': {'$gt': thresholds["wind_direction_max"]}},
-                {'Max_Tilt[Deg]': {'$gt': thresholds["wind_direction_max"]}},
-                {'Std_Tilt[Deg]': {'$gt': thresholds["wind_direction_max"]}},
-                {'Std_Tilt[Deg]': {'$gt': thresholds["wind_direction_max"]}},
-                {'SP_Std[cm/s]': {'$gt': thresholds["wind_direction_max"]}},
-                {'SP_Std[cm/s]': {'$gt': thresholds["wind_direction_max"]}},
-                {'Tilt_Y[Deg]': {'$gt': thresholds["wind_direction_max"]}},
-                {'Tilt_Y[Deg]': {'$gt': thresholds["wind_direction_max"]}},
-                {'Tilt_X[Deg]': {'$gt': thresholds["wind_direction_max"]}},
-                {'Tilt_X[Deg]': {'$lt': thresholds["wind_direction_min"]}}]}
+                {'Direction[DegM]': {'$lt': thresholds["dcs_direction_min"]}},
+                {'Direction[DegM]': {'$gt': thresholds["dcs_direction_max"]}}]}
+                # {'East[cm/s]': {'$lt': thresholds[""]}},
+                # {'East[cm/s]': {'$gt': thresholds[""]}},
+                # {'Temperature[DegC]': {'$gt': thresholds[""]}},
+                # {'Temperature[DegC]': {'$lt': thresholds[""]}},
+                # {'Heading[DegM]': {'$gt': thresholds[""]}},
+                # {'Heading[DegM]': {'$gt': thresholds[""]}},
+                # {'North[cm/s]': {'$gt': thresholds[""]}},
+                # {'North[cm/s]': {'$gt': thresholds[""]}},
+                # {'Abs_Speed[cm/s]': {'$gt': thresholds[""]}},
+                # {'Abs_Speed[cm/s]': {'$gt': thresholds[""]}},
+                # {'Abs_Tilt[Deg]': {'$gt': thresholds[""]}},
+                # {'Abs_Tilt[Deg]': {'$gt': thresholds[""]}},
+                # {'Strength[dB]': {'$gt': thresholds[""]}},
+                # {'Strength[dB]': {'$gt': thresholds[""]}},
+                # {'Max_Tilt[Deg]': {'$gt': thresholds[""]}},
+                # {'Max_Tilt[Deg]': {'$gt': thresholds[""]}},
+                # {'Std_Tilt[Deg]': {'$gt': thresholds[""]}},
+                # {'Std_Tilt[Deg]': {'$gt': thresholds[""]}},
+                # {'SP_Std[cm/s]': {'$gt': thresholds[""]}},
+                # {'SP_Std[cm/s]': {'$gt': thresholds[""]}},
+                # {'Tilt_Y[Deg]': {'$gt': thresholds["dcs_tilt_max"]}},
+                # {'Tilt_Y[Deg]': {'$lt': thresholds["dcs_tilt_min"]}},
+                # {'Tilt_X[Deg]': {'$gt': thresholds["dcs_tilt_max"]}},
+                # {'Tilt_X[Deg]': {'$lt': thresholds["dcs_tilt_min"]}}]}
     db.samples.update_many(
        filter,
        { '$set': { 'err_flag': err_flag } }
@@ -162,11 +160,11 @@ def validate_dcs_values():
 if  __name__ == "__main__":
     init_db()
     clean_threshholds()
-    # validate_brometer_values()
-    # validate_flntu_values()
-    # validate_microcat_values()
-    # validate_s9_values()
-    # validate_humidity_values()
-    # validate_ext_temp_values()
-    # validate_microstrain_values()
+    validate_brometer_values()
+    validate_flntu_values()
+    validate_microcat_values()
+    validate_s9_values()
+    validate_humidity_values()
+    validate_ext_temp_values()
+    validate_microstrain_values()
     validate_metpak_values()
