@@ -168,3 +168,4 @@ if  __name__ == "__main__":
     validate_ext_temp_values()
     validate_microstrain_values()
     validate_metpak_values()
+    validate_windsonic_values()
