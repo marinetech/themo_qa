@@ -2,7 +2,7 @@ from pymongo import MongoClient
 from qa_conf import *
 
 
-err_flag = "x"
+err_flag_th = "x"
 
 
 def init_db():
@@ -10,19 +10,19 @@ def init_db():
     global db; db = client.themo
 
 # def get_flg():
-#     cursor1= db.samples.find({'err_flag': 'x'})
+#     cursor1= db.samples.find({'threshold': 'x'})
 #     for record in cursor1:
-#         print("err_flag: " + record["err_flag"])
+#         print("err_flag_th: " + record["err_flag_th"])
 
 def clean_threshholds():
-    db.samples.update_many({}, {'$unset': {'err_flag': "x"}});
+    db.samples.update_many({}, {'$unset': {'threshold': err_flag_th}});
 
 def validate_brometer_values():
     # filter = {'sensor_name':'barometer', {$or [ 'BAROMETER': {'$lt': thresholds["barometer_ps_min"]}, 'BAROMETER': {'$gt': thresholds["barometer_ps_max"]} ] } }
     filter = {'sensor_name':'barometer', '$or': [ {'BAROMETER': {'$lt': thresholds["barometer_ps_min"]}}, {'BAROMETER': {'$gt': thresholds["barometer_ps_max"]}} ]}
     db.samples.update_many(
        filter,
-       { '$set': { 'err_flag': err_flag } }
+       { '$set': { 'threshold': err_flag_th } }
     )
 
 def validate_flntu_values():
@@ -33,7 +33,7 @@ def validate_flntu_values():
                 {'turbidity_units': {'$lt': thresholds["flntu_tur_min"]}}]}
     db.samples.update_many(
        filter,
-       { '$set': { 'err_flag': err_flag } }
+       { '$set': { 'threshold': err_flag_th } }
     )
 
 def validate_microcat_values():
@@ -46,7 +46,7 @@ def validate_microcat_values():
                 {'Temperature': {'$lt': thresholds["microcat_temp_min"]}}]}
     db.samples.update_many(
        filter,
-       { '$set': { 'err_flag': err_flag } }
+       { '$set': { 'threshold': err_flag_th } }
     )
 
 def validate_s9_values():
@@ -55,7 +55,7 @@ def validate_s9_values():
                 {'temperature': {'$gt': thresholds["s9_temp_max"]}}]}
     db.samples.update_many(
        filter,
-       { '$set': { 'err_flag': err_flag } }
+       { '$set': { 'threshold': err_flag_th } }
     )
 
 def validate_humidity_values():
@@ -64,7 +64,7 @@ def validate_humidity_values():
                 {'AvgLinearAdjVal': {'$gt': thresholds["humidity_max"]}}]}
     db.samples.update_many(
        filter,
-       { '$set': { 'err_flag': err_flag } }
+       { '$set': { 'threshold': err_flag_th } }
     )
 
 def validate_ext_temp_values():
@@ -73,7 +73,7 @@ def validate_ext_temp_values():
                 {'AvgLinearAdjVal': {'$gt': thresholds["ext_temp_max"]}}]}
     db.samples.update_many(
        filter,
-       { '$set': { 'err_flag': err_flag } }
+       { '$set': { 'threshold': err_flag_th } }
     )
 
 def validate_microstrain_values():
@@ -86,7 +86,7 @@ def validate_microstrain_values():
                 {'mean_period': {'$gt': thresholds["waves_mean_max"]}}]}
     db.samples.update_many(
        filter,
-       { '$set': { 'err_flag': err_flag } }
+       { '$set': { 'threshold': err_flag_th } }
     )
 
 def validate_metpak_values():
@@ -105,7 +105,7 @@ def validate_metpak_values():
                 {'pressure': {'$lt': thresholds["barometer_ps_min"]}}]}
     db.samples.update_many(
        filter,
-       { '$set': { 'err_flag': err_flag } }
+       { '$set': { 'threshold': err_flag_th } }
     )
 
 def validate_windsonic_values():
@@ -120,7 +120,7 @@ def validate_windsonic_values():
                 {'winddirection': {'$lt': thresholds["wind_direction_min"]}}]}
     db.samples.update_many(
        filter,
-       { '$set': { 'err_flag': err_flag } }
+       { '$set': { 'threshold': err_flag_th } }
     )
 
 def validate_dcs_values():
@@ -153,7 +153,7 @@ def validate_dcs_values():
                 # {'Tilt_X[Deg]': {'$lt': thresholds["dcs_tilt_min"]}}]}
     db.samples.update_many(
        filter,
-       { '$set': { 'err_flag': err_flag } }
+       { '$set': { 'threshold': err_flag_th } }
     )
 
 
