@@ -36,7 +36,7 @@ def evaluate(filter_exp, sort_exp, num_of_docs, fields_to_evaluate):
     # if one of the keys = True it means that we found a that one of the fields (fields_to_evaluate) is constant
     for key in const_flgs:
         if const_flgs[key]:
-            print("evaluate(): -I- found constant field: " + key)
+            print("evaluate(): -I- found constant field: " + key )
             cursor.rewind()
             for doc in cursor:
                 doc["const_err"] = err_flag_const
@@ -45,7 +45,7 @@ def evaluate(filter_exp, sort_exp, num_of_docs, fields_to_evaluate):
 
 def get_relevant_fields(sensor_name):
     flds = db.sensors.find_one({'name' : sensor_name})["fields_to_display"]
-    for fld in ['d_stamp', 't_stamp', 'threshold', 'const_err', 'Ping_Count', 'DCS_MEASUREMENT', 's9_id', 'depth']:
+    for fld in ['d_stamp', 't_stamp', 'threshold', 'const_err', 'Ping_Count', 'DCS_MEASUREMENT', 's9_id', 'depth', 'depth[m]']:
         try:
             flds.remove(fld)
         except:
@@ -138,6 +138,17 @@ def validate_dcs_values():
 
     evaluate(filter_exp, sort_exp, num_of_docs, fields_to_evaluate)
 
+def validate_adcp_values():
+    fields_to_evaluate = get_relevant_fields("adcp")
+    adcp_cursor = db.samples.distinct('depth[m]', { 'sensor_name': 'adcp' })
+    for adcp_depth in adcp_cursor:
+        print(adcp_depth)
+        filter_exp = {'sensor_name':'adcp', 'depth[m]' : adcp_depth}
+        sort_exp = [('d_stamp', 1) ,('t_stamp', 1)]
+        num_of_docs = default_num_of_docs
+
+        evaluate(filter_exp, sort_exp, num_of_docs, fields_to_evaluate)
+
 # main body
 if  __name__ == "__main__":
     init_db()
@@ -151,3 +162,4 @@ if  __name__ == "__main__":
     validate_metpak_values()
     validate_windsonic_values()
     validate_dcs_values()
+    validate_adcp_values()

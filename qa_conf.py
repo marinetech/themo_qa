@@ -52,3 +52,9 @@ thresholds["wind_direction_min"] = 0
 #-----------Wind-------------#
 thresholds["dcs_direction_max"] = 359
 thresholds["dcs_direction_min"] = 0
+
+#-----------adcp-------------#
+thresholds["adcp_direction_max"] = 359
+thresholds["adcp_direction_min"] = 0
+thresholds["adcp_speed_min"] = 0
+thresholds["adcp_speed_max"] = 100

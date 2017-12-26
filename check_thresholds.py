@@ -156,6 +156,17 @@ def validate_dcs_values():
        { '$set': { 'threshold': err_flag_th } }
     )
 
+def validate_adcp_values():
+    filter = {'sensor_name':'adcp', '$or': [
+                {'direction[deg]':225 , 'speed[m/s]':46.34},
+                {'direction[deg]': {'$lt': thresholds["adcp_direction_min"]}},
+                {'direction[deg]': {'$gt': thresholds["adcp_direction_max"]}},
+                {'speed[m/s]': {'$gt': thresholds["adcp_speed_max"]}},
+                {'speed[m/s]': {'$lt': thresholds["adcp_speed_min"]}}]}
+    db.samples.update_many(
+       filter,
+       { '$set': { 'threshold': err_flag_th } }
+    )
 
 if  __name__ == "__main__":
     init_db()
@@ -169,3 +180,5 @@ if  __name__ == "__main__":
     validate_microstrain_values()
     validate_metpak_values()
     validate_windsonic_values()
+    validate_dcs_values()
+    validate_adcp_values()
