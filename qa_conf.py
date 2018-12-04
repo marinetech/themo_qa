@@ -11,8 +11,8 @@ thresholds["barometer_ps_min"] = 1000
 thresholds["barometer_ps_max"] = 1028
 
 #-----------MICROCAT-------------#
-thresholds["microcat_sali_min"] = 39.2
-thresholds["microcat_sali_max"] = 39.9
+thresholds["microcat_sali_min"] = 39.0
+thresholds["microcat_sali_max"] = 40.0
 thresholds["microcat_cond_min"] = 4.8
 thresholds["microcat_cond_max"] = 7.1
 thresholds["microcat_temp_min"] = 16
