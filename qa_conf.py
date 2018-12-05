@@ -2,9 +2,9 @@ thresholds = {}
 
 #-------------FLNTU---------------#
 thresholds["flntu_ch_min"] = 0
-thresholds["flntu_ch_max"] = 0.7
+thresholds["flntu_ch_max"] = 2.0
 thresholds["flntu_tur_min"] = 0
-thresholds["flntu_tur_max"] = 0.65
+thresholds["flntu_tur_max"] = 2.0
 
 #-----------BAROMETER-------------#
 thresholds["barometer_ps_min"] = 1000
